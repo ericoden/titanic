@@ -16,13 +16,13 @@ from sklearn.svm import SVC
 from sklearn.neighbors import KNeighborsClassifier
 from sklearn.decomposition import PCA
 
-import tensorflow as tf
-from tensorflow import keras
-from keras.models import Model, Sequential
-from keras.layers import Dense, Dropout
+# import tensorflow as tf
+# from tensorflow import keras
+# from keras.models import Model, Sequential
+# from keras.layers import Dense, Dropout
 
 # from keras.wrappers.scikit_learn import KerasClassifier
-from scikeras.wrappers import KerasClassifier, KerasRegressor
+# from scikeras.wrappers import KerasClassifier
 
 
 from sklearn.metrics import accuracy_score
@@ -70,7 +70,7 @@ st.sidebar.write(
 
 
 clf_name = st.sidebar.selectbox(
-    "Select Classifier", ("Random Forest", "KNN", "SVM", "Neural Network")
+    "Select Classifier", ("Random Forest", "KNN", "SVM")
 )
 
 
@@ -229,46 +229,46 @@ if clf_name == "Random Forest":
     clf = RandomForestClassifier(random_state=42)
 elif clf_name == "SVM":
     clf = SVC()
-elif clf_name == "Neural Network":
+# elif clf_name == "Neural Network":
 
-    def create_model(
-        n_layers,
-        n_nodes_per_layer,
-        dropout,
-        kernel_initializer,
-        epochs=4,
-        optimizer="adagrad",
-    ):
-        model = Sequential()
-        model.add(
-            Dense(n_nodes_per_layer, activation="relu", input_shape=(n_cols,))
-        )
-        for _ in range(n_layers):
-            model.add(Dropout(dropout))
-            model.add(Dense(n_nodes_per_layer, activation="relu"))
-        model.add(Dropout(dropout))
-        model.add(Dense(1, activation="sigmoid"))
-        model.compile(
-            loss="binary_crossentropy",
-            optimizer=optimizer,
-            metrics=["accuracy"],
-        )
-        return model
+#     def create_model(
+#         n_layers,
+#         n_nodes_per_layer,
+#         dropout,
+#         kernel_initializer,
+#         epochs=4,
+#         optimizer="adagrad",
+#     ):
+#         model = Sequential()
+#         model.add(
+#             Dense(n_nodes_per_layer, activation="relu", input_shape=(n_cols,))
+#         )
+#         for _ in range(n_layers):
+#             model.add(Dropout(dropout))
+#             model.add(Dense(n_nodes_per_layer, activation="relu"))
+#         model.add(Dropout(dropout))
+#         model.add(Dense(1, activation="sigmoid"))
+#         model.compile(
+#             loss="binary_crossentropy",
+#             optimizer=optimizer,
+#             metrics=["accuracy"],
+#         )
+#         return model
 
-    early_stopping = tf.keras.callbacks.EarlyStopping(
-        monitor="loss", patience=3
-    )
-    clf = KerasClassifier(
-        create_model,
-        n_layers=1,
-        n_nodes_per_layer=32,
-        epochs=4,
-        dropout=0.2,
-        kernel_initializer="glorot_uniform",
-        verbose=0,
-        callbacks=[early_stopping],
-        random_state=42,
-    )
+#     early_stopping = tf.keras.callbacks.EarlyStopping(
+#         monitor="loss", patience=3
+#     )
+#     clf = KerasClassifier(
+#         create_model,
+#         n_layers=1,
+#         n_nodes_per_layer=32,
+#         epochs=4,
+#         dropout=0.2,
+#         kernel_initializer="glorot_uniform",
+#         verbose=0,
+#         callbacks=[early_stopping],
+#         random_state=42,
+#     )
 else:
     clf = KNeighborsClassifier()
 clf.set_params(**selected_params)
