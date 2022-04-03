@@ -15,4 +15,4 @@ The aim is to develop a model that predicts whether a passenger survived based o
 - Cabin Number
 - Port of Embarkation
 
-The app allows you to subset the features used, choose between three different classifiers, and select parameters for each classifier. Given a selection of features, the app presents a 2D visualization of the subsetted data, with points colored by outcome. Given the selected features, classifier and parameters, the app reports the accuracy, precision, recall of the resulting model, as well as a confusion matrix.
+The app allows you to subset the features used, choose between three different classifiers, and select parameters for each classifier. Given a selection of features, the app presents a 2D visualization of the subsetted data, with points colored by outcome. Given the selected features, classifier and parameters, the app reports the accuracy, precision, recall of the resulting model (on a validation set not used for training), as well as a confusion matrix.
