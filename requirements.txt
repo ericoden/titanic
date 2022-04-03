@@ -4,4 +4,4 @@ matplotlib
 pandas
 scikit-learn
 tensorflow
-scikeras
+scikeras[tensorflow]
